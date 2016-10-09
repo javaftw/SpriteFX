@@ -199,6 +199,14 @@ public class Entity extends Group implements Updatable {
         this.velocity = velocity;
     }
 
+    public Sprite getSprite() {
+        return sprite;
+    }
+
+    public void setSprite(Sprite sprite) {
+        this.sprite = sprite;
+    }
+
     /**
      * Returns the event handler for mouse events on this
      * entity, or null if it doesn't exist.

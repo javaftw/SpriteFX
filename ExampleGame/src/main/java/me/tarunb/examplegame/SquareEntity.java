@@ -24,53 +24,23 @@
  * THE SOFTWARE.
  */
 
-package me.tarunb.gamefx.physics;
+package me.tarunb.examplegame;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
+import me.tarunb.gamefx.entity.Entity;
+import me.tarunb.gamefx.graphics.Sprite;
+import me.tarunb.gamefx.physics.Physics;
 
-public class Position {
+public class SquareEntity extends Entity {
 
-    private DoubleProperty x, y;
-
-    public Position(double x, double y) {
-        this.x = new SimpleDoubleProperty(x);
-        this.y = new SimpleDoubleProperty(-y);
-    }
-
-    public double getX() {
-        return x.get();
-    }
-
-    public void setX(double x) {
-        this.x.set(x);
-    }
-
-    public double getY() {
-        return -y.get();
-    }
-
-    public void setY(double y) {
-        this.y.set(-y);
-    }
-
-    public DoubleProperty xProperty() {
-        return x;
-    }
-
-    public DoubleProperty yProperty() {
-        return y;
-    }
-
-    public AbsolutePosition toAbsolutePosition() {
-        return new AbsolutePosition(getX(), getY());
+    public SquareEntity() {
+        super(Sprite.BLANK_IMAGE);
     }
 
     @Override
-    public String toString() {
-        return "Position{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
+    public void update(double dt) {
+        super.update(dt);
+        if (getPosition().getX() + getSprite().getImageView().getFitWidth() / Physics.PPM >= ExampleGame.WIDTH / Physics.PPM) {
+            getVelocity().multiply(-1);
+        }
     }
 }

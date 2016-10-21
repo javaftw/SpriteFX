@@ -32,6 +32,7 @@ public class Physics {
 
     public static Vector GRAVITY = new Vector(0, -9.8);
 
+    // TODO implement friction on the ground
     public static double FRICTION = 0.5;
 
 }

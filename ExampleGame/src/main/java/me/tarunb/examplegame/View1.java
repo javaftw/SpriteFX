@@ -26,22 +26,31 @@
 
 package me.tarunb.examplegame;
 
-import me.tarunb.gamefx.entity.Entity;
-import me.tarunb.gamefx.graphics.Sprite;
-import me.tarunb.gamefx.physics.Physics;
+import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
+import me.tarunb.gamefx.input.KeyHandler;
+import me.tarunb.gamefx.physics.PolarVector;
+import me.tarunb.gamefx.view.View;
 
-public class SquareEntity extends Entity {
+public class View1 extends View {
 
-    public SquareEntity() {
-        super(new Sprite("#/trump.png"));
+    public View1() {
+        super("view1", Color.LIGHTBLUE);
     }
 
     @Override
-    public void update(double dt) {
-        super.update(dt);
-        if (getPosition().getX() + getSprite().getImageView().getFitWidth() >= ExampleGame.WIDTH) {
-            getVelocity().multiply(-1);
-        }
+    protected void onBeforeLoad() {
+        super.onBeforeLoad(); // must call super.onBeforeLoad(), otherwise game loop won't be started
+        SquareEntity square = new SquareEntity();
+        square.setKeyHandler(new KeyHandler() {
+            @Override
+            public void pressed(KeyCode button, KeyCode modifier) {
+                if (button == KeyCode.SPACE) {
+                    square.setVelocity(new PolarVector(10, 45).toVector());
+                }
+            }
+        });
+        square.addToView(this);
     }
 
 }

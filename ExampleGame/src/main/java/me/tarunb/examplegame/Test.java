@@ -26,22 +26,17 @@
 
 package me.tarunb.examplegame;
 
-import me.tarunb.gamefx.entity.Entity;
-import me.tarunb.gamefx.graphics.Sprite;
-import me.tarunb.gamefx.physics.Physics;
+import me.tarunb.gamefx.physics.AbsolutePosition;
+import me.tarunb.gamefx.physics.Position;
 
-public class SquareEntity extends Entity {
+public class Test {
 
-    public SquareEntity() {
-        super(new Sprite("#/trump.png"));
-    }
+    public static void main(String[] args) {
+        Position p = new Position(10, 10);
+        System.out.println(p.xProperty().get());
 
-    @Override
-    public void update(double dt) {
-        super.update(dt);
-        if (getPosition().getX() + getSprite().getImageView().getFitWidth() >= ExampleGame.WIDTH) {
-            getVelocity().multiply(-1);
-        }
+        AbsolutePosition ap = new AbsolutePosition(10, 10);
+        System.out.println(ap.xProperty().get());
     }
 
 }

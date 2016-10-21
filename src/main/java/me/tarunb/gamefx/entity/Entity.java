@@ -26,6 +26,7 @@
 
 package me.tarunb.gamefx.entity;
 
+import javafx.scene.image.Image;
 import me.tarunb.gamefx.graphics.Sprite;
 import me.tarunb.gamefx.graphics.Updatable;
 import me.tarunb.gamefx.input.KeyHandler;
@@ -44,7 +45,7 @@ public class Entity extends Group implements Updatable {
 
     private Position position;
     private Vector velocity;
-    private Sprite sprite;
+    private final Sprite sprite;
 
     private View view;
 
@@ -199,12 +200,15 @@ public class Entity extends Group implements Updatable {
         this.velocity = velocity;
     }
 
+
+    /**
+     * Returns the sprite associated with this entity.
+     * To change the image of the sprite, use the
+     * {@link Sprite#setImage} method.
+     * @return
+     */
     public Sprite getSprite() {
         return sprite;
-    }
-
-    public void setSprite(Sprite sprite) {
-        this.sprite = sprite;
     }
 
     /**
@@ -243,3 +247,4 @@ public class Entity extends Group implements Updatable {
         this.keyHandler = keyHandler;
     }
 }
+

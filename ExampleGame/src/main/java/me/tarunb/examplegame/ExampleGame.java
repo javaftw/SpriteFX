@@ -22,27 +22,15 @@ public class ExampleGame extends Application {
     public static final int WIDTH = 800;
     public static final int HEIGHT = 600;
 
-    private Random random = new Random();
-
     @Override
     public void start(Stage stage) throws Exception {
         stage.setWidth(WIDTH);
         stage.setHeight(HEIGHT);
 
-        View view = new View("view1", Color.LIGHTBLUE);
-        ViewManager.registerView(view);
-        ViewManager.setView("view1", stage);
+        View1 v1 = new View1();
 
-        SquareEntity square = new SquareEntity();
-        square.setKeyHandler(new KeyHandler() {
-            @Override
-            public void pressed(KeyCode button, KeyCode modifier) {
-                if (button == KeyCode.SPACE) {
-                    square.setVelocity(new PolarVector(5, random.nextDouble() * 90).toVector());
-                }
-            }
-        });
-        square.addToView(view);
+        ViewManager.registerView(v1);
+        ViewManager.setView(v1.getId(), stage);
 
         stage.show();
     }

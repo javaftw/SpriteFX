@@ -26,33 +26,32 @@
 
 package me.tarunb.gamefx.physics;
 
-public class AbsolutePosition {
+public class AbsolutePosition extends Position {
 
     private double x, y;
 
     public AbsolutePosition(double x, double y) {
-        this.x = x / Physics.PPM;
-        this.y = y / Physics.PPM;
+        super(x / Physics.PPM, y / Physics.PPM);
     }
 
+    @Override
     public double getX() {
-        return x;
+        return x * Physics.PPM;
     }
 
+    @Override
+    public double getY() {
+        return y * Physics.PPM;
+    }
+
+    @Override
     public void setX(double x) {
         this.x = x / Physics.PPM;
     }
 
-    public double getY() {
-        return y;
-    }
-
+    @Override
     public void setY(double y) {
         this.y = y / Physics.PPM;
-    }
-
-    public Position toPosition() {
-        return new Position(x, y);
     }
 
     @Override
@@ -62,4 +61,5 @@ public class AbsolutePosition {
                 ", y=" + y +
                 '}';
     }
+
 }

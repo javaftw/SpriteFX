@@ -1,18 +1,3 @@
-package me.tarunb.gamefx.view;
-
-import me.tarunb.gamefx.Utils;
-import me.tarunb.gamefx.entity.Entity;
-import me.tarunb.gamefx.input.KeyHandler;
-import me.tarunb.gamefx.input.MouseHandler;
-import javafx.animation.AnimationTimer;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-
-import java.util.concurrent.ConcurrentLinkedQueue;
-
 /**
  * GameFX
  * <p>
@@ -38,6 +23,22 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
+package me.tarunb.gamefx.view;
+
+import me.tarunb.gamefx.Utils;
+import me.tarunb.gamefx.entity.Entity;
+import me.tarunb.gamefx.input.KeyHandler;
+import me.tarunb.gamefx.input.MouseHandler;
+import javafx.animation.AnimationTimer;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+
+import java.util.concurrent.ConcurrentLinkedQueue;
+
 
 public class View extends Scene {
 
@@ -77,8 +78,6 @@ public class View extends Scene {
 
     };
 
-    private Runnable beforeLoad, afterLoad, beforeUnload, afterUnload;
-
     View() {
         super(new StackPane());
         this.id = "default";
@@ -110,25 +109,22 @@ public class View extends Scene {
         return id;
     }
 
-    public void setBeforeLoad(Runnable beforeLoad) {
-        this.beforeLoad = beforeLoad;
+    protected void onBeforeLoad() {
+        animationTimer.start();
     }
 
-    public void setAfterLoad(Runnable afterLoad) {
-        this.afterLoad = afterLoad;
+    protected void onAfterLoad() {}
+
+    protected void onAfterUnload() {
+        animationTimer.stop();
     }
 
-    public void setBeforeUnload(Runnable beforeUnload) {
-        this.beforeUnload = beforeUnload;
-    }
-
-    public void setAfterUnload(Runnable afterUnload) {
-        this.afterUnload = afterUnload;
-    }
+    protected void onBeforeUnload() {}
 
     /**
      * This method is called by {@link Entity}, and should not be used anywhere else.
      * Use the {@link Entity#addToView} method instead.
+     *
      * @param newEntity The entity to add
      */
     public void addEntity(Entity newEntity) {
@@ -139,6 +135,7 @@ public class View extends Scene {
     /**
      * This method is called by {@link Entity}, and should not be used anywhere else.
      * Use the {@link Entity#removeFromParentView()} method instead.
+     *
      * @param entity The entity to remove
      */
     public void removeEntity(Entity entity) {
@@ -211,48 +208,6 @@ public class View extends Scene {
                 }
             });
         });
-    }
-
-    void beforeLoad() {
-        if (beforeLoad != null) {
-            beforeLoad.run();
-        }
-    }
-
-    void beforeUnload() {
-        if (beforeUnload != null) {
-            beforeUnload.run();
-        }
-        animationTimer.stop();
-    }
-
-    void afterLoad() {
-        if (afterLoad != null) {
-            afterLoad.run();
-        }
-        animationTimer.start();
-    }
-
-    void afterUnload() {
-        if (afterUnload != null) {
-            afterUnload.run();
-        }
-    }
-
-    public Runnable getBeforeLoad() {
-        return beforeLoad;
-    }
-
-    public Runnable getAfterLoad() {
-        return afterLoad;
-    }
-
-    public Runnable getBeforeUnload() {
-        return beforeUnload;
-    }
-
-    public Runnable getAfterUnload() {
-        return afterUnload;
     }
 
 

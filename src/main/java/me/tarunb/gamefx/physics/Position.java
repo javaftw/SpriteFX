@@ -46,6 +46,7 @@ public class Position {
         this.x.set(x);
     }
 
+    // because y is switched on computer graphics
     public double getY() {
         return -y.get();
     }
@@ -62,9 +63,9 @@ public class Position {
         return y;
     }
 
-    public AbsolutePosition toAbsolutePosition() {
-        return new AbsolutePosition(getX(), getY());
-    }
+//    public AbsolutePosition toAbsolutePosition() {
+//        return new AbsolutePosition(getX(), getY());
+//    }
 
     @Override
     public String toString() {

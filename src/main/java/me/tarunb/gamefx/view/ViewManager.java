@@ -1,10 +1,3 @@
-package me.tarunb.gamefx.view;
-
-import javafx.stage.Stage;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * GameFX
  * <p>
@@ -31,6 +24,13 @@ import java.util.List;
  * THE SOFTWARE.
  */
 
+package me.tarunb.gamefx.view;
+
+import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class ViewManager {
 
     private static List<View> registeredViews = new ArrayList<>();
@@ -45,13 +45,13 @@ public class ViewManager {
         }
 
         if (currentView != null) {
-            currentView.beforeUnload();
+            currentView.onBeforeUnload();
         }
-        newView.beforeLoad();
+        newView.onBeforeLoad();
         stage.setScene(newView);
-        newView.afterLoad();
+        newView.onAfterLoad();
         if (currentView != null) {
-            currentView.afterUnload();
+            currentView.onAfterUnload();
         }
         currentView = newView;
     }

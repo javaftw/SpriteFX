@@ -26,6 +26,7 @@
 
 package me.tarunb.examplegame;
 
+import me.tarunb.gamefx.Game;
 import me.tarunb.gamefx.entity.Entity;
 import me.tarunb.gamefx.graphics.Sprite;
 import me.tarunb.gamefx.physics.Physics;
@@ -39,7 +40,7 @@ public class SquareEntity extends Entity {
     @Override
     public void update(double dt) {
         super.update(dt);
-        if (getPosition().getX() + getSprite().getImageView().getFitWidth() >= ExampleGame.WIDTH) {
+        if (getPosition().getX() + getSprite().getImageView().getFitWidth() >= Game.getWidth()) {
             getVelocity().multiply(-1);
         }
     }

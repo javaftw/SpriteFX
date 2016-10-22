@@ -29,11 +29,14 @@ package me.tarunb.gamefx.view;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ViewManager {
 
-    private static List<View> registeredViews = new ArrayList<>();
+    private static Map<String, View> registeredViews = new HashMap<>();
 
     private static View defaultView = new View();
     private static View currentView = null;
@@ -57,21 +60,19 @@ public class ViewManager {
     }
 
     public static void registerView(View view) {
-        registeredViews.add(view);
+        registeredViews.put(view.getId(), view);
     }
 
     public static View getDefaultView() {
         return defaultView;
     }
 
+    public static void setDefaultView(String defaultViewId) {
+        ViewManager.defaultView = getView(defaultViewId);
+    }
+
     public static View getView(String id) {
-        final View[] view = {null};
-        registeredViews.forEach(v -> {
-            if (v.getId().equals(id)) {
-                view[0] = v;
-            }
-        });
-        return view[0];
+        return registeredViews.get(id);
     }
 
 }

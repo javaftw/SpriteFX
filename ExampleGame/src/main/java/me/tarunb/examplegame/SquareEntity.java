@@ -40,8 +40,8 @@ public class SquareEntity extends Entity {
     @Override
     public void update(double dt) {
         super.update(dt);
-        if (getPosition().getX() + getSprite().getImageView().getFitWidth() >= Game.getWidth()) {
-            getVelocity().multiply(-1);
+        if (getPosition().getX() + getSprite().getImageView().getFitWidth() >= (Game.getWidth() - 20) / Physics.PPM) {
+            getVelocity().multiply(-0.1, 1);
         }
     }
 
